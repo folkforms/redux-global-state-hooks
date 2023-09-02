@@ -6,11 +6,11 @@ You want to use this for simple pieces of local data spread across components, n
 
 ## tl;dr
 
-Use `createGlobalStateReducer` to create a reducer in your `store.js` file and set the initial value.
+Use `createGlobalStateReducer` to create a reducer and set the initial value in your `store.js` file.
 
 Use `createGlobalStateHook` in, say, `useCounter.js`.
 
-Use `const [counter, setCounter] = useCounter();` in your component.
+Use `useCounter` as `const [counter, setCounter] = useCounter();` in your component.
 
 ## Give me an example
 
