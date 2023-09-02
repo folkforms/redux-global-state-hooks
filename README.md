@@ -64,6 +64,7 @@ import { createGlobalStateReducer } from '@folkforms/redux-global-state-hook';
 
 export default configureStore({
   reducer: {
+    // Arguments are the namespace and initial value
     counter: createGlobalStateReducer('counter', 1),
   }
 });
@@ -74,7 +75,7 @@ export default configureStore({
 ```
 import { createGlobalStateHook } from '@folkforms/redux-global-state-hook';
 
-const counter = createGlobalStateHook('counter');
+const counter = createGlobalStateHook('counter'); // Argument is the namespace
 export default counter;
 ```
 
