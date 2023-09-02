@@ -1,5 +1,5 @@
 {
-  "name": "@folkforms/redux-global-state-hook",
+  "name": "@folkforms/redux-global-state-hooks",
   "version": "0.0.3",
   "description": "Create React hooks that work similar to `useState` but which are backed with Redux and don't need `Context`.",
   "main": "src/redux-global-state-hooks.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/folkforms/redux-global-state-hook.git"
+    "url": "git+https://github.com/folkforms/redux-global-state-hooks.git"
   },
   "keywords": [
     "react",
@@ -21,9 +21,9 @@
   "author": "folkforms",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/folkforms/redux-global-state-hook/issues"
+    "url": "https://github.com/folkforms/redux-global-state-hooks/issues"
   },
-  "homepage": "https://github.com/folkforms/redux-global-state-hook#readme",
+  "homepage": "https://github.com/folkforms/redux-global-state-hooks#readme",
   "dependencies": {
     "@folkforms/line-endings": "^0.0.12",
     "@folkforms/npm-release": "^0.0.26",
