@@ -4,11 +4,15 @@ Create hooks that work similar to `useState` but which are backed with Redux and
 
 Use this for simple pieces of local data spread across components. For data that needs to be fetched over the network you can use `react-query` or similar.
 
+I assume you are using [Redux Toolkit](https://redux-toolkit.js.org/) since it is now the official standard approach for writing Redux logic. It won't work with old Redux.
+
 ## tl;dr
 
-Use `createGlobalStateHook` in, say, `useCounter.js`.
+`import { createHook, createReducer } from @folkforms/react-global-state-hooks;`
 
-Use `createGlobalStateReducer` to create a reducer and set the initial value in your `store.js` file.
+Use `createHook` in, say, `useCounter.js`.
+
+Use `createReducer` in your `store.js` file to create a reducer and set the initial value.
 
 Use `useCounter` as `const [counter, setCounter] = useCounter();` in your component.
 
@@ -16,14 +20,15 @@ It's just like a React hook but it's backed by Redux.
 
 ## Give me an example
 
-`ComponentOne.js:`
+`ComponentOne.js`:
 
 ```
 import React from 'react';
 import useCounter from './useCounter';
 
 const ComponentOne = () => {
-  const [counter, setCounter] = useCounter(); // Same counter data as ComponentTwo
+  // Uses the same counter data in Redux store as ComponentTwo
+  const [counter, setCounter] = useCounter();
   return (
     <>
       <h3>Component One</h3>
@@ -36,14 +41,15 @@ const ComponentOne = () => {
 export default ComponentOne;
 ```
 
-`ComponentTwo.js:`
+`ComponentTwo.js`:
 
 ```
 import React from 'react';
 import useCounter from './useCounter';
 
 const ComponentTwo = () => {
-  const [counter, setCounter] = useCounter(); // Same counter data as ComponentOne
+  // Uses the same counter data in Redux store as ComponentOne
+  const [counter, setCounter] = useCounter();
   return (
     <>
       <h3>Component Two</h3>
@@ -60,12 +66,12 @@ export default ComponentTwo;
 
 ```
 import { configureStore } from '@reduxjs/toolkit';
-import { createGlobalStateReducer } from '@folkforms/redux-global-state-hooks';
+import { createReducer } from '@folkforms/redux-global-state-hooks';
 
 export default configureStore({
   reducer: {
-    // Arguments are the namespace and initial value
-    counter: createGlobalStateReducer('counter', 1),
+    // Arguments are the namespace and the initial value
+    counter: createReducer('counter', 1),
   }
 });
 ```
@@ -73,23 +79,24 @@ export default configureStore({
 `useCounter.js`:
 
 ```
-import { createGlobalStateHook } from '@folkforms/redux-global-state-hooks';
+import { createHook } from '@folkforms/redux-global-state-hooks';
 
-const counter = createGlobalStateHook('counter'); // Argument is the namespace
-export default counter;
+// Argument is the namespace
+const useCounter = createHook('counter');
+export default useCounter;
 ```
 
 ## y tho?
 
 It makes handling simple pieces of data easier.
 
-Compare `foo` vs `const foo = useSelector(selectFoo);` to get data.
+Compare the above code to creating a dedicated Redux store slice, and using `useSelector` and `useDispatch`. The above code is much shorter.
 
-Compare `setFoo(1)` vs `const dispatch = useDispatch(); dispatch(updateFoo(1));` to update data.
+It allows you to create a Redux store slice automatically.
 
-- It saves you from the boilerplate of `useSelector` and `useDispatch`
-- It allows you to create a Redux store slice automatically
-- It is very similar to `useState` in its use
+It is very similar to `useState` in its use but it's global, not local.
+
+I love `useState` but I find that when my apps get above a certain size then `useContext` breaks down and I either start building my own version of Redux (bad) or using Redux itself. Redux is great, but it does tend to make something simple like storing a piece of data quite tedious and full of boilerplate. This library is designed to alleviate that problem while still being compatible with Redux.
 
 ## Why do I set the initial value in `store.js`?
 
