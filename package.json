@@ -1,6 +1,6 @@
 {
   "name": "@folkforms/redux-global-state-hooks",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Create React hooks that work similar to `useState` but which are backed with Redux and don't need `Context`.",
   "main": "src/redux-global-state-hooks.js",
   "scripts": {
